@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Flex Demo</title>
+
+        <style>
+            #katak {
+                display: flex;
+                justify-content: space-around;
+                /* align-items: flex-end; */
+                height: 100vh;
+                flex-direction: row;
+            }
+
+            #katak-tiga {
+                align-self: flex-end;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="katak">
+            <div style="order: 200">
+                <h1>Katak 1</h1>
+            </div>
+            <div style="order: 1000">
+                <h1>Katak 2</h1>
+            </div>
+            <div id="katak-tiga">
+                <h1>Katak 3</h1>
+            </div>
+            <div>
+                <h1>Katak 4</h1>
+            </div>
+            <div style="order: -1">
+                <h1>Katak 5</h1>
+            </div>
+        </div>
+    </body>
+</html>
