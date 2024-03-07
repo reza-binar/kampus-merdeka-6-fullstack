@@ -46,6 +46,7 @@
                             type="search"
                             placeholder="Search"
                             aria-label="Search"
+                            id="search-input"
                         />
                         <button class="btn btn-outline-success" type="submit">
                             Search
@@ -56,6 +57,16 @@
         </nav>
 
         <div class="container mt-4">
+            <div class="row g-4 mb-4 justify-content-end">
+                <div class="col-md-3">
+                    <select class="form-select" id="sort">
+                        <option selected value="default">Paling Sesuai</option>
+                        <option value="ascending">A-Z</option>
+                        <option value="descending">Z-A</option>
+                    </select>
+                </div>
+            </div>
+
             <div class="row g-4" id="student-card"></div>
         </div>
 
