@@ -4,7 +4,7 @@ const studentCard = document.getElementById("student-card");
 
 // Get students
 async function getStudents() {
-    const studentsData = await students.getStudents();
+    const studentsData = await students.getStudentsData();
     let studensDataInCards = "";
     studentsData.map((student) => {
         studensDataInCards += `<div class="col-md-4">
