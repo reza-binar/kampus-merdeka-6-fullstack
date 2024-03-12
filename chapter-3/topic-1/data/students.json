@@ -1,0 +1,44 @@
+[
+    {
+        "name": "Nida",
+        "address": {
+            "city": "Jakarta",
+            "province": "DKI Jakarta"
+        }
+    },
+    {
+        "name": "Dwi",
+        "address": {
+            "city": "Tangerang",
+            "province": "Banten"
+        }
+    },
+    {
+        "name": "Feb",
+        "address": {
+            "city": "Tangerang",
+            "province": "Banten"
+        }
+    },
+    {
+        "name": "Hukma",
+        "address": {
+            "city": "Bandung",
+            "province": "Jawa Barat"
+        }
+    },
+    {
+        "name": "Fauzan",
+        "address": {
+            "city": "Bandung",
+            "province": "Jawa Barat"
+        }
+    },
+    {
+        "name": "Shahrizan",
+        "address": {
+            "city": "Palembang",
+            "province": "Sumatera Selatan"
+        }
+    }
+]
