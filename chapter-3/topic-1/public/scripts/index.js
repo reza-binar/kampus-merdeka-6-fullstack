@@ -1,10 +1,12 @@
 import students from "./students.js";
 
 const studentCard = document.getElementById("student-card");
+const searchInput = document.getElementById("search-input");
+const searchSubmit = document.getElementById("search-submit");
 
 // Get students
-async function getStudents() {
-    const studentsData = await students.getStudentsData();
+async function getStudents(name) {
+    const studentsData = await students.getStudentsData(name);
     let studensDataInCards = "";
     studentsData.map((student) => {
         studensDataInCards += `<div class="col-md-4">
@@ -18,4 +20,12 @@ async function getStudents() {
     });
     studentCard.innerHTML = studensDataInCards;
 }
-getStudents();
+
+searchSubmit.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const name = searchInput.value;
+    getStudents(name);
+});
+
+getStudents("");
