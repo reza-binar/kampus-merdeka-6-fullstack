@@ -17,7 +17,19 @@ app.use(express.static("public"));
 
 /* Add routes */
 app.get("/students", (req, res) => {
-    res.status(200).json(students);
+    const { name, city, province } = req.query;
+    let data = students.map((student) => student);
+
+    data = data.filter(
+        (student) =>
+            student.name.toLowerCase().includes(name.toLowerCase()) &&
+            student.address.city.toLowerCase().includes(city.toLowerCase()) &&
+            student.address.province
+                .toLowerCase()
+                .includes(province.toLowerCase())
+    );
+
+    res.status(200).json(data);
 });
 
 app.listen(port, () => {
