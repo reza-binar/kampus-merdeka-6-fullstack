@@ -30,3 +30,14 @@ exports.getStudents = (name, city, province) => {
 
     return data;
 };
+
+exports.getStudent = (id) => {
+    let data = students.map((student) => student);
+
+    data = data.filter((student) => student.id == id);
+    if (data.length == 0) {
+        return null;
+    }
+
+    return data[0];
+};

@@ -21,26 +21,6 @@ app.use(express.static("public"));
 
 app.use("/", route);
 
-app.get("/students/:id", (req, res) => {
-    const { id } = req.params;
-    let data = students.map((student) => student);
-
-    data = data.filter((student) => student.id == id);
-    if (data.length == 0) {
-        return res.status(404).json({
-            message: `Student with id ${id} is not found!`,
-            data: null,
-        });
-    }
-
-    const response = {
-        data: data[0],
-        message: null,
-    };
-
-    res.status(200).json(response);
-});
-
 app.post("/students", (req, res) => {
     // validate the request from user
     const { name, address } = req.body;
