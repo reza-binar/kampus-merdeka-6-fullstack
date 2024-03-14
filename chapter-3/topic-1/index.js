@@ -167,6 +167,20 @@ app.put("/students/:id", (req, res) => {
     });
 });
 
+app.delete("/students/:id", (req, res) => {
+    const id = parseInt(req?.params?.id);
+
+    // Mini Challenge: Delete here, you can do with filter or for or another method
+    index = students.findIndex((student) => student.id === id);
+    students.splice(index, 1);
+
+    // Response
+    res.status(200).json({
+        data: null,
+        message: "Success",
+    });
+});
+
 app.listen(port, () => {
     console.log(`Server running on ${port}!`);
 });
