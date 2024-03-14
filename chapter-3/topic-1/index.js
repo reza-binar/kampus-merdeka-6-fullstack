@@ -4,6 +4,7 @@
 */
 const express = require("express");
 const students = require("./data/students.json");
+const route = require("./route");
 
 /* Initiate express app */
 const app = express();
@@ -18,43 +19,7 @@ app.use(express.json());
 */
 app.use(express.static("public"));
 
-/* Add routes */
-app.get("/students", (req, res) => {
-    const { name, city, province } = req.query;
-    let data = students.map((student) => student);
-
-    data = data.filter((student) => {
-        let filteredStatus = true;
-        if (name) {
-            filteredStatus =
-                filteredStatus &&
-                student.name.toLowerCase().includes(name?.toLowerCase());
-        }
-        if (city) {
-            filteredStatus =
-                filteredStatus &&
-                student.address.city
-                    .toLowerCase()
-                    .includes(city?.toLowerCase());
-        }
-        if (province) {
-            filteredStatus =
-                filteredStatus &&
-                student.address.province
-                    .toLowerCase()
-                    .includes(province?.toLowerCase());
-        }
-
-        return filteredStatus;
-    });
-
-    const response = {
-        data,
-        message: null,
-    };
-
-    res.status(200).json(response);
-});
+app.use("/", route);
 
 app.get("/students/:id", (req, res) => {
     const { id } = req.params;
