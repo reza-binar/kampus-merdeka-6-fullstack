@@ -19,6 +19,7 @@ app.use(express.json());
 */
 app.use(express.static("public"));
 
+// "/"
 app.use("/", route);
 
 app.post("/students", (req, res) => {
