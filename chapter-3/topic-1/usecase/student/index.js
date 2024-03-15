@@ -9,3 +9,8 @@ exports.getStudent = (id) => {
     const data = studentRepo.getStudent(id);
     return data;
 };
+
+exports.addStudent = (payload) => {
+    const data = studentRepo.addStudent(payload);
+    return data;
+};

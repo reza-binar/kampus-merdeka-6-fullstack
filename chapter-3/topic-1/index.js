@@ -22,53 +22,6 @@ app.use(express.static("public"));
 // "/"
 app.use("/", route);
 
-app.post("/students", (req, res) => {
-    // validate the request from user
-    const { name, address } = req.body;
-    if (!name || name == "") {
-        return res.status(400).json({
-            data: null,
-            message: "Name must be filled!",
-        });
-    }
-    if (!address) {
-        return res.status(400).json({
-            data: null,
-            message: "Address must be filled!",
-        });
-    }
-
-    const { city, province } = address;
-    if (!city || city == "") {
-        return res.status(400).json({
-            data: null,
-            message: "City must be filled!",
-        });
-    }
-    if (!province || province == "") {
-        return res.status(400).json({
-            data: null,
-            message: "Province must be filled!",
-        });
-    }
-
-    /* Process insert data */
-    // get the last id and then add 1
-    const lastStudent = students[students.length - 1];
-    req.body = {
-        id: lastStudent.id + 1,
-        ...req.body,
-    };
-
-    // Insert to data student
-    students.push(req.body);
-
-    res.status(201).json({
-        data: req.body,
-        message: null,
-    });
-});
-
 /* Mini Challenge: API to Update (PUT the Data) */
 app.put("/students/:id", (req, res) => {
     // validate the request from user

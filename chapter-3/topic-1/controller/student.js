@@ -32,3 +32,41 @@ exports.getStudent = (req, res) => {
 
     res.status(200).json(response);
 };
+
+exports.addStudent = (req, res) => {
+    // validate the request from user
+    const { name, address } = req.body;
+    if (!name || name == "") {
+        return res.status(400).json({
+            data: null,
+            message: "Name must be filled!",
+        });
+    }
+    if (!address) {
+        return res.status(400).json({
+            data: null,
+            message: "Address must be filled!",
+        });
+    }
+
+    const { city, province } = address;
+    if (!city || city == "") {
+        return res.status(400).json({
+            data: null,
+            message: "City must be filled!",
+        });
+    }
+    if (!province || province == "") {
+        return res.status(400).json({
+            data: null,
+            message: "Province must be filled!",
+        });
+    }
+
+    const data = studentUsecase.addStudent(req.body);
+
+    res.status(201).json({
+        data,
+        message: null,
+    });
+};

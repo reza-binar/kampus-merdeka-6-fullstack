@@ -41,3 +41,18 @@ exports.getStudent = (id) => {
 
     return data[0];
 };
+
+exports.addStudent = (payload) => {
+    /* Process insert data */
+    // get the last id and then add 1
+    const lastStudent = students[students.length - 1];
+    payload = {
+        id: lastStudent.id + 1,
+        ...payload,
+    };
+
+    // Insert to data student
+    students.push(payload);
+
+    return payload;
+};
