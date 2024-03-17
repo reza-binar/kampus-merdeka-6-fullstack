@@ -56,3 +56,25 @@ exports.addStudent = (payload) => {
 
     return payload;
 };
+
+exports.updateStudent = (id, payload) => {
+    updatedStudentIndex = 0;
+
+    // Update the data by id
+    students.map((student, index) => {
+        if (student?.id == id) {
+            students[index] = payload;
+            updatedStudentIndex = index;
+        }
+    });
+
+    return students[updatedStudentIndex];
+};
+
+exports.deleteStudent = (id) => {
+    // Mini Challenge: Delete here, you can do with filter or for or another method
+    index = students.findIndex((student) => student.id === id);
+    students.splice(index, 1);
+
+    return null;
+};

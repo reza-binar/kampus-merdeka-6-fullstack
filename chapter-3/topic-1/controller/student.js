@@ -70,3 +70,53 @@ exports.addStudent = (req, res) => {
         message: null,
     });
 };
+
+exports.updateStudent = (req, res) => {
+    // validate the request from user
+    const { name, address } = req.body;
+    if (!name || name == "") {
+        return res.status(400).json({
+            data: null,
+            message: "Name must be filled!",
+        });
+    }
+
+    const { city, province } = address;
+    if (!city || city == "") {
+        return res.status(400).json({
+            data: null,
+            message: "City must be filled!",
+        });
+    }
+    if (!province || province == "") {
+        return res.status(400).json({
+            data: null,
+            message: "Province must be filled!",
+        });
+    }
+
+    const id = parseInt(req?.params?.id);
+    const updatedStudent = {
+        id: id,
+        ...req.body,
+    };
+
+    const data = studentUsecase.updateStudent(id, updatedStudent);
+
+    res.status(200).json({
+        data: data,
+        message: null,
+    });
+};
+
+exports.deleteStudent = (req, res) => {
+    const id = parseInt(req?.params?.id);
+
+    const data = studentUsecase.deleteStudent(id);
+
+    // Response
+    res.status(200).json({
+        data,
+        message: "Success",
+    });
+};

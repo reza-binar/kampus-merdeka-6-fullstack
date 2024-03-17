@@ -22,64 +22,6 @@ app.use(express.static("public"));
 // "/"
 app.use("/", route);
 
-/* Mini Challenge: API to Update (PUT the Data) */
-app.put("/students/:id", (req, res) => {
-    // validate the request from user
-    const { name, address } = req.body;
-    if (!name || name == "") {
-        return res.status(400).json({
-            data: null,
-            message: "Name must be filled!",
-        });
-    }
-
-    const { city, province } = address;
-    if (!city || city == "") {
-        return res.status(400).json({
-            data: null,
-            message: "City must be filled!",
-        });
-    }
-    if (!province || province == "") {
-        return res.status(400).json({
-            data: null,
-            message: "Province must be filled!",
-        });
-    }
-
-    const id = parseInt(req?.params?.id);
-    const updatedStudent = {
-        id: id,
-        ...req.body,
-    };
-
-    // Update the data by id
-    students.map((student, index) => {
-        if (student?.id == id) {
-            students[index] = updatedStudent;
-        }
-    });
-
-    res.status(200).json({
-        data: updatedStudent,
-        message: null,
-    });
-});
-
-app.delete("/students/:id", (req, res) => {
-    const id = parseInt(req?.params?.id);
-
-    // Mini Challenge: Delete here, you can do with filter or for or another method
-    index = students.findIndex((student) => student.id === id);
-    students.splice(index, 1);
-
-    // Response
-    res.status(200).json({
-        data: null,
-        message: "Success",
-    });
-});
-
 app.listen(port, () => {
     console.log(`Server running on ${port}!`);
 });

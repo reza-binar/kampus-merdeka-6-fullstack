@@ -14,3 +14,13 @@ exports.addStudent = (payload) => {
     const data = studentRepo.addStudent(payload);
     return data;
 };
+
+exports.updateStudent = (id, payload) => {
+    const data = studentRepo.updateStudent(id, payload);
+    return data;
+};
+
+exports.deleteStudent = (id) => {
+    const data = studentRepo.deleteStudent(id);
+    return data;
+};
