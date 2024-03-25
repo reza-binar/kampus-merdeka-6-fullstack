@@ -10,6 +10,13 @@
             "name": "Chapter 3 - Topic 1",
             "cwd": "${workspaceFolder}/chapter-3/topic-1",
             "program": "${workspaceFolder}/chapter-3/topic-1/index.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Chapter 4 - Topic 1",
+            "cwd": "${workspaceFolder}/chapter-4/topic-1",
+            "program": "${workspaceFolder}/chapter-4/topic-1/index.js"
         }
     ]
 }
