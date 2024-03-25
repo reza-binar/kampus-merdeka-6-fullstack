@@ -1,8 +1,71 @@
 const classUsecase = require("../usecase/class");
 
-exports.getClass = async (req, res) => {
+exports.getClasses = async (req, res, next) => {
+    const data = await classUsecase.getClasses();
+
+    res.status(200).json({
+        message: "Successs",
+        data,
+    });
+};
+
+exports.getClass = async (req, res, next) => {
     const { id } = req.params;
     const data = await classUsecase.getClass(id);
+    if (!data) {
+        return next({
+            message: `Class with id ${id} is not found!`,
+            statusCode: 404,
+        });
+    }
+
+    res.status(200).json({
+        message: "Successs",
+        data,
+    });
+};
+
+exports.createClass = async (req, res, next) => {
+    const { name } = req.body;
+    if (!name || name == "") {
+        return next({
+            message: "Name must be provided!",
+            statusCode: 400,
+        });
+    }
+
+    const data = await classUsecase.createClass({
+        name,
+    });
+
+    res.status(201).json({
+        message: "Successs",
+        data,
+    });
+};
+
+exports.updateClass = async (req, res, next) => {
+    const { id } = req.params;
+    const { name } = req.body;
+    if (!name || name == "") {
+        return next({
+            message: "Name must be provided!",
+            statusCode: 400,
+        });
+    }
+
+    const data = await classUsecase.updateClass(id, { name });
+
+    res.status(200).json({
+        message: "Successs",
+        data,
+    });
+};
+
+exports.deleteClass = async (req, res, next) => {
+    const { id } = req.params;
+
+    const data = await classUsecase.deleteClass(id);
 
     res.status(200).json({
         message: "Successs",

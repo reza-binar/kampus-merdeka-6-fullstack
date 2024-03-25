@@ -3,6 +3,15 @@ const router = express.Router();
 
 const classController = require("../controller/class");
 
-router.route("/:id").get(classController.getClass);
+router
+    .route("/")
+    .get(classController.getClasses)
+    .post(classController.createClass);
+
+router
+    .route("/:id")
+    .get(classController.getClass)
+    .put(classController.updateClass)
+    .delete(classController.deleteClass);
 
 module.exports = router;
