@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
             sequelize,
             modelName: "classes",
             tableName: "classes",
+            paranoid: true, // enable soft delete
         }
     );
     return classes;

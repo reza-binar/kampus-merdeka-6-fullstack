@@ -22,7 +22,7 @@ exports.getClass = async (id) => {
         return data[0];
     }
 
-    return null;
+    throw new Error(`Class is not found!`);
 };
 
 exports.createClass = async (payload) => {
