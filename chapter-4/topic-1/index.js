@@ -1,10 +1,18 @@
+require("dotenv").config(); // enable dotenv
+
 const express = require("express");
+const fileUpload = require("express-fileupload");
 const router = require("./route");
 
 const app = express();
 const port = 4000;
 
-app.use(express.json());
+app.use(express.json()); // body -> json
+app.use(
+    fileUpload({
+        useTempFiles: true,
+    })
+); // body -> form-data
 app.use(express.static("public"));
 
 app.use("/api", router);

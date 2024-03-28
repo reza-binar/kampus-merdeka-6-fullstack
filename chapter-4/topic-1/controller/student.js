@@ -36,6 +36,7 @@ exports.getStudent = async (req, res, next) => {
 exports.createStudent = async (req, res, next) => {
     try {
         const { name, class_id } = req.body;
+        const { photo } = req.files; // get photo file
         if (!name || name == "") {
             return next({
                 message: "Name must be provided!",
@@ -52,6 +53,7 @@ exports.createStudent = async (req, res, next) => {
         const data = await studentUsecase.createStudent({
             name,
             class_id,
+            photo,
         });
 
         res.status(201).json({

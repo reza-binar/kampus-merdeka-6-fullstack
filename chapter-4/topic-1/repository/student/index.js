@@ -1,4 +1,7 @@
+const crypto = require("crypto");
+const path = require("path");
 const { classes, student } = require("../../models");
+const { uploader } = require("../../helper/cloudinary");
 
 exports.getStudents = async () => {
     const data = await student.findAll({
@@ -26,6 +29,21 @@ exports.getStudent = async (id) => {
 };
 
 exports.createStudent = async (payload) => {
+    if (payload.photo) {
+        // upload image to cloudinary
+        const { photo } = payload;
+
+        // make unique filename -> 213123128uasod9as8djas
+        photo.publicId = crypto.randomBytes(16).toString("hex");
+
+        // rename the file -> 213123128uasod9as8djas.jpg / 213123128uasod9as8djas.png
+        photo.name = `${photo.publicId}${path.parse(photo.name).ext}`;
+
+        // Process to upload image
+        const imageUpload = await uploader(photo);
+        payload.photo = imageUpload.secure_url;
+    }
+
     const data = await student.create(payload);
     return data;
 };
