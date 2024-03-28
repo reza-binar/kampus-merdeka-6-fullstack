@@ -30,7 +30,7 @@ exports.getClass = async (id) => {
     });
     if (data.length > 0) {
         // save in the redis if in the postgres is found
-        await setData(key, data, 300);
+        await setData(key, data[0], 300);
 
         return data[0];
     }
@@ -82,7 +82,7 @@ exports.deleteClass = async (id) => {
     const key = `classes:${id}`;
 
     // delete from postgres
-    const data = await classes.destroy({ where: { id } });
+    await classes.destroy({ where: { id } });
 
     // delete from redis
     await deleteData(key);
