@@ -37,7 +37,7 @@ exports.createUser = async (payload) => {
     return data;
 };
 
-exports.getUser = async (id) => {
+exports.getUserByID = async (id) => {
     const key = `user:${id}`;
 
     // get from redis
@@ -62,7 +62,7 @@ exports.getUser = async (id) => {
     throw new Error(`User is not found!`);
 };
 
-exports.getUser = async (email) => {
+exports.getUserByEmail = async (email) => {
     const key = `user:${email}`;
 
     // get from redis
