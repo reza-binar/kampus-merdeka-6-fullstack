@@ -1,4 +1,5 @@
-const { register, login } = require("../usecase/auth");
+const { register, login, profile } = require("../usecase/auth");
+const { getTokenFromHeaders, extractToken } = require("../helper/auth");
 
 exports.register = async (req, res, next) => {
     try {
@@ -63,6 +64,26 @@ exports.login = async (req, res, next) => {
 
         // login logic
         const data = await login(email, password);
+
+        res.status(200).json({
+            message: "Success",
+            data,
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+exports.profile = async (req, res, next) => {
+    try {
+        // get token from headers
+        const token = getTokenFromHeaders(req.headers);
+
+        // extract token to get the user id
+        const extractedToken = extractToken(token);
+
+        // get user by id
+        const data = await profile(extractedToken.id);
 
         res.status(200).json({
             message: "Success",

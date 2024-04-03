@@ -1,6 +1,10 @@
 const jsonwebtoken = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const { createUser, getUserByEmail } = require("../../repository/user");
+const {
+    createUser,
+    getUserByEmail,
+    getUserByID,
+} = require("../../repository/user");
 
 exports.register = async (payload) => {
     let user = await createUser(payload);
@@ -60,6 +64,23 @@ exports.login = async (email, password) => {
         user,
         token,
     };
+
+    return data;
+};
+
+exports.profile = async (id) => {
+    // get the user
+    let data = await getUserByID(id);
+    if (!data) {
+        throw new Error(`User is not found!`);
+    }
+
+    // delete password
+    if (data?.dataValues?.password) {
+        delete data?.dataValues?.password;
+    } else {
+        delete data?.password;
+    }
 
     return data;
 };
