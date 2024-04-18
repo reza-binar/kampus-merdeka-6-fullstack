@@ -1,4 +1,4 @@
-name: Deploy to GCP App Engine
+name: Deploy to GCP App Engine (Chapter 5)
 
 on:
     push:
