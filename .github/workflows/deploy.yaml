@@ -14,12 +14,15 @@ jobs:
               uses: actions/checkout@v4
 
             - name: Generate env from secrets
-              run: echo ${{ secrets.CHAPTER_5_GCP_ENV }} > ./chapter-5/topic-1/.env
+              working-directory: ./chapter-5/topic-1
+              run: echo ${{ secrets.CHAPTER_5_GCP_ENV }} > .env
 
             - name: Install dependencies
+              working-directory: ./chapter-5/topic-1
               run: npm install
 
             - name: Migrate the new database
+              working-directory: ./chapter-5/topic-1
               run: npx sequelize db:migrate
 
             - id: "auth"
@@ -31,5 +34,6 @@ jobs:
               uses: "google-github-actions/setup-gcloud@v2"
 
             - name: Deploy to App Engine
+              working-directory: ./chapter-5/topic-1
               run: |
-                  gcloud app deploy ./chapter-5/topic-1/app.yaml --quiet
+                  gcloud app deploy app.yaml --quiet
