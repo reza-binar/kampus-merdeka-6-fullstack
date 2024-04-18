@@ -17,7 +17,7 @@ jobs:
               run: echo ${{ secrets.CHAPTER_5_GCP_ENV }} > ./chapter-5/topic-1/.env
 
             - name: Set Up Google Cloud SDK
-              uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+              uses: GoogleCloudPlatform/github-actions/setup-gcloud@v1
               with:
                   service_account_key: ${{ secrets.CHAPTER_5_GCP_SA_KEY }}
                   project_id: ${{ secrets.CHAPTER_5_PROJECT_ID}}
