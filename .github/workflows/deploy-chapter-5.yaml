@@ -29,4 +29,4 @@ jobs:
             - name: Deploy to App Engine
               working-directory: ./chapter-5/topic-1 # delete when the project is in the root (challenge)
               run: |
-                  gcloud app deploy app.yaml --quiet
+                  gcloud app deploy app.yaml
