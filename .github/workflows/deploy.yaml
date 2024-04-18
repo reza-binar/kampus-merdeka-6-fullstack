@@ -16,6 +16,12 @@ jobs:
             - name: Generate env from secrets
               run: echo ${{ secrets.CHAPTER_5_GCP_ENV }} > ./chapter-5/topic-1/.env
 
+            - name: Install dependencies
+              run: npm install
+
+            - name: Migrate the new database
+              run: npx sequelize db:migrate
+
             - id: "auth"
               uses: "google-github-actions/auth@v2"
               with:
