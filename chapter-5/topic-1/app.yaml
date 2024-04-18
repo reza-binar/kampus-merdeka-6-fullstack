@@ -1,2 +1,6 @@
 runtime: nodejs20
-service: chapter-5-topic-1
+service: fahmi-alfareza-chapter-5
+
+predeploy:
+    - npm install
+    - npx sequelize db:migrate
