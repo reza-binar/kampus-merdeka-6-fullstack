@@ -8,7 +8,6 @@ on:
 jobs:
     deploy:
         runs-on: ubuntu-latest
-
         steps:
             - name: Checkout Repository
               uses: actions/checkout@v4
@@ -19,7 +18,9 @@ jobs:
 
             - name: Generate env from secrets
               working-directory: ./chapter-5/topic-1
-              run: echo `${{ secrets.CHAPTER_5_GCP_ENV }}` > .env
+              run: |
+                  SECRETS="${{ secrets.CHAPTER_5_GCP_ENV }}"
+                  echo "$SECRETS" | tr ';' '\n' >> .env
 
             - name: Install dependencies
               working-directory: ./chapter-5/topic-1
