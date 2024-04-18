@@ -18,8 +18,7 @@ jobs:
                   echo "Chapter 5 GCP Env: ${{ secrets.CHAPTER_5_GCP_ENV }}"
 
             - name: Generate env from secrets
-              working-directory: ./chapter-5/topic-1
-              run: echo ${{ secrets.CHAPTER_5_GCP_ENV }} > .env
+              run: echo ${{ secrets.CHAPTER_5_GCP_ENV }} > ./chapter-5/topic-1/.env
 
             - name: Install dependencies
               working-directory: ./chapter-5/topic-1
