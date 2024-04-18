@@ -1,0 +1,28 @@
+name: Deploy to GCP App Engine
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+
+            - name: Generate env from secrets
+              run: echo ${{ secrets.CHAPTER_5_GCP_ENV }} > ./chapter-5/topic-1/.env
+
+            - name: Set Up Google Cloud SDK
+              uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+              with:
+                  service_account_key: ${{ secrets.CHAPTER_5_GCP_SA_KEY }}
+                  project_id: ${{ secrets.CHAPTER_5_PROJECT_ID}}
+                  export_default_credentials: true
+
+            - name: Deploy to App Engine
+              run: |
+                  gcloud app deploy ./chapter-5/topic-1/app.yaml --quiet
