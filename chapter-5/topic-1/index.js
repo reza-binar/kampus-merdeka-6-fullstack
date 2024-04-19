@@ -11,7 +11,7 @@ app.use(express.json()); // body -> json
 app.use(
     fileUpload({
         useTempFiles: true,
-        tempFileDir: process.env.NODE_ENV == "development" ? "./tmp" : "/tmp",
+        tempFileDir: process.env.NODE_ENV == "development" ? "./tmp" : "/tmp", // if you're using GCP App Engine please don't comment this, because the ./tmp directory is read only and we need write too so we use /tmp
     })
 ); // body -> form-data
 app.use(express.static("public"));
