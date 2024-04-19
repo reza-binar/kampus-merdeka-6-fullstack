@@ -11,6 +11,7 @@ app.use(express.json()); // body -> json
 app.use(
     fileUpload({
         useTempFiles: true,
+        tempFileDir: process.env.NODE_ENV == "development" ? "./tmp" : "/tmp",
     })
 ); // body -> form-data
 app.use(express.static("public"));
