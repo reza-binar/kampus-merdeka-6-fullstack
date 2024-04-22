@@ -1,10 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Container from "react-bootstrap/Container";
+import "bootstrap/dist/css/bootstrap.min.css"; // apply bootstrap for styling
 
 import Navbar from "./components/Navbar";
 import Login from "./pages/login";
-
-import "bootstrap/dist/css/bootstrap.min.css"; // apply bootstrap for styling
-import Container from "react-bootstrap/Container";
+import Register from "./pages/register";
 
 const router = createBrowserRouter([
     {
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
             <>
                 <Navbar />
                 <Container className="mt-5">
-                    <h1>Register</h1>
+                    <Register />
                 </Container>
             </>
         ),
