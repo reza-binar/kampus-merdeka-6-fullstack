@@ -1,10 +1,42 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+import axios from "axios";
+import { Container, Nav, Navbar } from "react-bootstrap";
 
 const NavbarComponent = () => {
+    const [user, setUser] = useState(null);
+
+    const getProfile = async (token) => {
+        let config = {
+            method: "get",
+            maxBodyLength: Infinity,
+            url: `${import.meta.env.VITE_BACKEND_API}/api/auth/profile`,
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+
+        try {
+            const response = await axios.request(config);
+            const { data } = response.data;
+
+            // set user by response
+            setUser(data);
+        } catch (error) {
+            // because token is not valid, we will delete it from local storage
+            setUser(null);
+            localStorage.removeItem("token");
+        }
+    };
+
+    useEffect(() => {
+        // get user profile if we have token
+        const token = localStorage.getItem("token");
+        if (token) {
+            getProfile(token);
+        }
+    }, []);
+
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container>
@@ -17,12 +49,30 @@ const NavbarComponent = () => {
                         <Nav.Link as={Link} to="/">
                             Home
                         </Nav.Link>
-                        <Nav.Link as={Link} to="/login">
-                            Login
-                        </Nav.Link>
-                        <Nav.Link as={Link} to="/register">
-                            Register
-                        </Nav.Link>
+                        {user ? (
+                            <>
+                                <Nav.Link as={Link} to="/profile">
+                                    {user?.name}
+                                </Nav.Link>
+                                <Nav.Link
+                                    onClick={() => {
+                                        localStorage.removeItem("token");
+                                        window.location = "";
+                                    }}
+                                >
+                                    Logout
+                                </Nav.Link>
+                            </>
+                        ) : (
+                            <>
+                                <Nav.Link as={Link} to="/login">
+                                    Login
+                                </Nav.Link>
+                                <Nav.Link as={Link} to="/register">
+                                    Register
+                                </Nav.Link>
+                            </>
+                        )}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

@@ -1,9 +1,12 @@
 import { useState } from "react";
+// import { useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 function Login() {
+    // const navigate = useNavigate();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
@@ -31,7 +34,15 @@ function Login() {
 
         try {
             const response = await axios.request(config);
-            console.log(JSON.stringify(response.data));
+
+            // get and save the token to local storage
+            const { data } = response.data;
+            const { token } = data;
+            localStorage.setItem("token", token);
+
+            // redirect to home
+            // navigate("/"); // it will be not consistent, so alternative we use window until we used the state management
+            window.location = "/"; // temporary solution
         } catch (error) {
             toast.error(error?.response?.data?.message);
         }
