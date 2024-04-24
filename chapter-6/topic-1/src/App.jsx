@@ -1,10 +1,14 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Container from "react-bootstrap/Container";
-import "bootstrap/dist/css/bootstrap.min.css"; // apply bootstrap for styling
+import { ToastContainer } from "react-toastify";
 
 import Navbar from "./components/Navbar";
+import Home from "./pages/home";
 import Login from "./pages/login";
 import Register from "./pages/register";
+
+import "bootstrap/dist/css/bootstrap.min.css"; // apply bootstrap for styling
+import "react-toastify/dist/ReactToastify.css";
 
 const router = createBrowserRouter([
     {
@@ -13,7 +17,7 @@ const router = createBrowserRouter([
             <>
                 <Navbar />
                 <Container className="mt-5">
-                    <h1>Home</h1>
+                    <Home />
                 </Container>
             </>
         ),
@@ -43,7 +47,13 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-    return <RouterProvider router={router} />;
+    return (
+        <>
+            <RouterProvider router={router} />
+
+            <ToastContainer theme="colored" />
+        </>
+    );
 }
 
 export default App;
