@@ -54,13 +54,15 @@ const Profile = () => {
                                 </>
                             ) : (
                                 <>
-                                    <Image
-                                        src={user?.photo}
-                                        className="img-fluid"
-                                        rounded
-                                    />
+                                    {user?.photo && (
+                                        <Image
+                                            src={user?.photo}
+                                            className="img-fluid"
+                                            rounded
+                                        />
+                                    )}
 
-                                    <div className="mt-4">
+                                    <div className={user?.photo && "mt-4"}>
                                         <Form.Group
                                             className="mb-3"
                                             controlId="name"
