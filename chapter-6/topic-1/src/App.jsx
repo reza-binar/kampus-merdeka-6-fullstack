@@ -9,6 +9,7 @@ import Register from "./pages/register";
 
 import "bootstrap/dist/css/bootstrap.min.css"; // apply bootstrap for styling
 import "react-toastify/dist/ReactToastify.css";
+import Profile from "./pages/profile";
 
 const router = createBrowserRouter([
     {
@@ -40,6 +41,17 @@ const router = createBrowserRouter([
                 <Navbar />
                 <Container className="mt-5">
                     <Register />
+                </Container>
+            </>
+        ),
+    },
+    {
+        path: "/profile",
+        element: (
+            <>
+                <Navbar />
+                <Container className="mt-5">
+                    <Profile />
                 </Container>
             </>
         ),
