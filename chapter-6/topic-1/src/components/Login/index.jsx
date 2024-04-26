@@ -59,6 +59,7 @@ function Login() {
                     placeholder="Enter email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    required
                 />
                 <Form.Text className="text-muted">
                     We will never share your email with anyone else.
@@ -72,10 +73,11 @@ function Login() {
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    required
                 />
             </Form.Group>
             <Button variant="primary" type="submit" disabled={isLoading}>
-                {isLoading ? "Processing..." : "Submit"}
+                {isLoading ? "Processing..." : "Login"}
             </Button>
         </Form>
     );
