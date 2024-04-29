@@ -1,44 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import { Container, Nav, Navbar } from "react-bootstrap";
-// import { useSelector } from "react-redux";
+import { getProfile } from "../../redux/actions/auth";
 
 const NavbarComponent = () => {
-    // const { token } = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
 
-    const [user, setUser] = useState(null);
-
-    const getProfile = async (token) => {
-        let config = {
-            method: "get",
-            maxBodyLength: Infinity,
-            url: `${import.meta.env.VITE_BACKEND_API}/api/auth/profile`,
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        };
-
-        try {
-            const response = await axios.request(config);
-            const { data } = response.data;
-
-            // set user by response
-            setUser(data);
-        } catch (error) {
-            // because token is not valid, we will delete it from local storage
-            setUser(null);
-            localStorage.removeItem("token");
-        }
-    };
+    const { user, token } = useSelector((state) => state.auth);
 
     useEffect(() => {
         // get user profile if we have token
-        const token = localStorage.getItem("token");
-        if (token) {
-            getProfile(token);
-        }
-    }, []);
+        dispatch(getProfile());
+    }, [dispatch, token]);
 
     return (
         <Navbar expand="lg" className="bg-body-tertiary">

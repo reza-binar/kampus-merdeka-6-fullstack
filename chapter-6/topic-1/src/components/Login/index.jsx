@@ -1,11 +1,11 @@
 import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/actions/auth";
 
 function Login() {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const [email, setEmail] = useState("");
@@ -19,7 +19,7 @@ function Login() {
         setIsLoading(true);
 
         /* login action (fetch api) */
-        dispatch(login(email, password));
+        dispatch(login(navigate, email, password));
 
         setIsLoading(false);
     };

@@ -1,8 +1,8 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { setToken } from "../reducers/auth";
+import { setToken, setUser } from "../reducers/auth";
 
-export const login = (email, password) => async (dispatch) => {
+export const login = (navigate, email, password) => async (dispatch) => {
     let data = JSON.stringify({
         email,
         password,
@@ -26,11 +26,37 @@ export const login = (email, password) => async (dispatch) => {
 
         // Change the token value in the reducer
         dispatch(setToken(token));
+        dispatch(setUser(data?.user));
 
         // redirect to home
-        // navigate("/"); // it will be not consistent, so alternative we use window until we used the state management
-        window.location = "/"; // temporary solution
+        navigate("/"); // it will be not consistent, so alternative we use window until we used the state management
     } catch (error) {
         toast.error(error?.response?.data?.message);
+    }
+};
+
+export const getProfile = () => async (dispatch, getState) => {
+    const state = getState();
+    const { token } = state.auth;
+
+    let config = {
+        method: "get",
+        url: `${import.meta.env.VITE_BACKEND_API}/api/auth/profile`,
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    };
+
+    try {
+        const response = await axios.request(config);
+        const { data } = response.data;
+        console.log(data);
+
+        // set user by response
+        dispatch(setUser(data));
+    } catch (error) {
+        // because token is not valid, we will delete it from local storage
+        dispatch(setUser(null));
+        localStorage.removeItem("token");
     }
 };
