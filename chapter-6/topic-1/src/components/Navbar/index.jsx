@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { Container, Nav, Navbar } from "react-bootstrap";
+// import { useSelector } from "react-redux";
 
 const NavbarComponent = () => {
+    // const { token } = useSelector((state) => state.auth);
+
     const [user, setUser] = useState(null);
 
     const getProfile = async (token) => {

@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import { ToastContainer } from "react-toastify";
+import { Provider } from "react-redux";
 
 import Navbar from "./components/Navbar";
 import Home from "./pages/home";
@@ -12,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Profile from "./pages/profile";
 import Protected from "./components/Protected";
 import NonProtected from "./components/NonProtected";
+import store from "./redux/store";
 
 const router = createBrowserRouter([
     {
@@ -62,11 +64,11 @@ const router = createBrowserRouter([
 
 function App() {
     return (
-        <>
+        <Provider store={store}>
             <RouterProvider router={router} />
 
             <ToastContainer theme="colored" />
-        </>
+        </Provider>
     );
 }
 

@@ -1,11 +1,12 @@
 import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
-import axios from "axios";
-import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/actions/auth";
 
 function Login() {
     // const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -18,34 +19,7 @@ function Login() {
         setIsLoading(true);
 
         /* login action (fetch api) */
-        let data = JSON.stringify({
-            email,
-            password,
-        });
-
-        let config = {
-            method: "post",
-            url: `${import.meta.env.VITE_BACKEND_API}/api/auth/login`,
-            headers: {
-                "Content-Type": "application/json",
-            },
-            data: data,
-        };
-
-        try {
-            const response = await axios.request(config);
-
-            // get and save the token to local storage
-            const { data } = response.data;
-            const { token } = data;
-            localStorage.setItem("token", token);
-
-            // redirect to home
-            // navigate("/"); // it will be not consistent, so alternative we use window until we used the state management
-            window.location = "/"; // temporary solution
-        } catch (error) {
-            toast.error(error?.response?.data?.message);
-        }
+        dispatch(login(email, password));
 
         setIsLoading(false);
     };
