@@ -11,6 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css"; // apply bootstrap for styling
 import "react-toastify/dist/ReactToastify.css";
 import Profile from "./pages/profile";
 import Protected from "./components/Protected";
+import NonProtected from "./components/NonProtected";
 
 const router = createBrowserRouter([
     {
@@ -27,23 +28,23 @@ const router = createBrowserRouter([
     {
         path: "/login",
         element: (
-            <>
+            <NonProtected>
                 <Navbar />
                 <Container className="mt-5">
                     <Login />
                 </Container>
-            </>
+            </NonProtected>
         ),
     },
     {
         path: "/register",
         element: (
-            <>
+            <NonProtected>
                 <Navbar />
                 <Container className="mt-5">
                     <Register />
                 </Container>
-            </>
+            </NonProtected>
         ),
     },
     {
