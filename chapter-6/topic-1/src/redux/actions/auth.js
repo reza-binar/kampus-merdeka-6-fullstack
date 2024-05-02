@@ -26,11 +26,11 @@ export const login =
 
             // get and save the token to local storage
             const { data } = response.data;
-            const { token } = data;
+            const { token, user } = data;
 
             // Change the token value in the reducer
             dispatch(setToken(token));
-            dispatch(setUser(data?.user));
+            dispatch(setUser(user));
 
             // redirect to home
             navigate("/"); // it will be not consistent, so alternative we use window until we used the state management
@@ -85,8 +85,7 @@ export const register =
 export const getProfile =
     (navigate, successRedirect, errorRedirect) =>
     async (dispatch, getState) => {
-        const state = getState();
-        const { token } = state.auth;
+        const { token } = getState().auth;
 
         if (!token) {
             // because token is not valid, we will delete it from local storage

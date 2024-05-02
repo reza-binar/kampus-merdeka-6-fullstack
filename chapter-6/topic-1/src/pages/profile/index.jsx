@@ -9,12 +9,8 @@ const Profile = () => {
     const { user } = useSelector((state) => state.auth);
 
     useEffect(() => {
-        // get user profile if we have token
-        const token = localStorage.getItem("token");
-        if (token) {
-            // get profile
-            dispatch(getProfile(null, null, null));
-        }
+        // get profile
+        dispatch(getProfile(null, null, null));
     }, [dispatch]);
 
     return (
