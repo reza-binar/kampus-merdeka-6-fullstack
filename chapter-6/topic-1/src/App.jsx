@@ -13,6 +13,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Profile from "./pages/profile";
 import Protected from "./components/Protected";
 import NonProtected from "./components/NonProtected";
+import StudentDetail from "./pages/student/details";
+
 import store from "./redux/store";
 
 const router = createBrowserRouter([
@@ -56,6 +58,17 @@ const router = createBrowserRouter([
                 <Navbar />
                 <Container className="mt-5">
                     <Profile />
+                </Container>
+            </Protected>
+        ),
+    },
+    {
+        path: "/students/:id",
+        element: (
+            <Protected>
+                <Navbar />
+                <Container className="mt-5">
+                    <StudentDetail />
                 </Container>
             </Protected>
         ),

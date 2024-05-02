@@ -1,9 +1,10 @@
 import { Col, Card, Image } from "react-bootstrap";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const StudentCard = ({ student }) => {
     return (
-        <Col md={4}>
+        <Col md={4} as={Link} to={`/students/${student?.id}`}>
             <Card>
                 <Card.Header>{student?.name}</Card.Header>
                 <Card.Body>
