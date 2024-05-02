@@ -15,13 +15,8 @@ function Login() {
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        // make loading
-        setIsLoading(true);
-
         /* login action (fetch api) */
-        dispatch(login(navigate, email, password));
-
-        setIsLoading(false);
+        dispatch(login(navigate, email, password, setIsLoading));
     };
 
     return (

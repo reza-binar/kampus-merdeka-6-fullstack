@@ -1,45 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Row, Col, Card, Form, Image } from "react-bootstrap";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getProfile } from "../../redux/actions/auth";
 
 const Profile = () => {
-    const [user, setUser] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const dispatch = useDispatch();
 
-    const getProfile = async (token) => {
-        setIsLoading(true);
-
-        let config = {
-            method: "get",
-            maxBodyLength: Infinity,
-            url: `${import.meta.env.VITE_BACKEND_API}/api/auth/profile`,
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        };
-
-        try {
-            const response = await axios.request(config);
-            const { data } = response.data;
-
-            // set user by response
-            setUser(data);
-        } catch (error) {
-            // because token is not valid, we will delete it from local storage
-            setUser(null);
-            localStorage.removeItem("token");
-        }
-
-        setIsLoading(false);
-    };
+    const { user } = useSelector((state) => state.auth);
 
     useEffect(() => {
         // get user profile if we have token
         const token = localStorage.getItem("token");
         if (token) {
-            getProfile(token);
+            // get profile
+            dispatch(getProfile(null, null, null));
         }
-    }, []);
+    }, [dispatch]);
 
     return (
         <Row>
@@ -48,7 +24,7 @@ const Profile = () => {
                     <Card.Header>My Profile</Card.Header>
                     <Card.Body>
                         <Form>
-                            {isLoading ? (
+                            {!user ? (
                                 <>
                                     <h2>Loading...</h2>
                                 </>

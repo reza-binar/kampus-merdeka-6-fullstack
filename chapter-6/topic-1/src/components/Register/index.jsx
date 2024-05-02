@@ -1,10 +1,15 @@
 import { useState } from "react";
-import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { register } from "../../redux/actions/auth";
 
 function Login() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -20,39 +25,10 @@ function Login() {
             return;
         }
 
-        // make loading
-        setIsLoading(true);
-
-        let data = new FormData();
-        data.append("email", email);
-        data.append("password", password);
-        data.append("name", name);
-        if (photo) {
-            data.append("photo", photo);
-        }
-
-        let config = {
-            method: "post",
-            url: `${import.meta.env.VITE_BACKEND_API}/api/auth/register`,
-            data: data,
-        };
-
-        try {
-            const response = await axios.request(config);
-
-            // get and save the token to local storage
-            const { data } = response.data;
-            const { token } = data;
-            localStorage.setItem("token", token);
-
-            // redirect to home
-            // navigate("/"); // it will be not consistent, so alternative we use window until we used the state management
-            window.location = "/"; // temporary solution
-        } catch (error) {
-            toast.error(error?.response?.data?.message);
-        }
-
-        setIsLoading(false);
+        // dispatch the register action
+        dispatch(
+            register(navigate, email, password, name, photo, setIsLoading)
+        );
     };
 
     return (

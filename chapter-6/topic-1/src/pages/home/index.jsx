@@ -1,39 +1,25 @@
-import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { Row } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { getStudents } from "../../redux/actions/student";
+import StudentCard from "../../components/StudentCard";
 
 const Home = () => {
-    const { token } = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
 
-    const [count, setCount] = useState(0);
-    const [fauzan, setFauzan] = useState("Fauzan");
+    const { students } = useSelector((state) => state.student);
+
+    useEffect(() => {
+        dispatch(getStudents());
+    }, [dispatch]);
 
     return (
-        <>
-            <h1>Home</h1>
-            <p>Count: {count}</p>
-            <p>Fauzan: {fauzan}</p>
-            <p>Token: {token}</p>
-
-            <Button
-                variant="primary"
-                onClick={() => {
-                    setCount(count + 1);
-                    setFauzan("Richard");
-                }}
-            >
-                Add Count
-            </Button>
-            <Button
-                variant="primary"
-                onClick={() => {
-                    setCount(count - 1);
-                    setFauzan("Fauzan");
-                }}
-            >
-                Reduce Count
-            </Button>
-        </>
+        <Row>
+            {students.length > 0 &&
+                students.map((student) => (
+                    <StudentCard key={student?.id} student={student} />
+                ))}
+        </Row>
     );
 };
 
