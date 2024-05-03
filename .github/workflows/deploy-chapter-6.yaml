@@ -20,9 +20,13 @@ jobs:
               run: npm install --global vercel@latest
             - name: Install dependencies
               run: npm install
+              working-directory: ./chapter-6/topic-1
             - name: Pull Vercel Environment Information
               run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+              working-directory: ./chapter-6/topic-1
             - name: Build Project Artifacts
               run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+              working-directory: ./chapter-6/topic-1
             - name: Deploy Project Artifacts to Vercel
               run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+              working-directory: ./chapter-6/topic-1
