@@ -1,4 +1,4 @@
-name: Deploy to Vercel (Chapter 6)
+name: Vercel Production Deployment
 env:
     VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
     VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -10,9 +10,15 @@ jobs:
     Deploy-Production:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v4
+            - name: Use Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20.x"
             - name: Install Vercel CLI
               run: npm install --global vercel@latest
+            - name: Install dependencies
+              uses: npm install
             - name: Pull Vercel Environment Information
               run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
             - name: Build Project Artifacts
