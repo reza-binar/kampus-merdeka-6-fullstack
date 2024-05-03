@@ -54,7 +54,7 @@ const router = createBrowserRouter([
     {
         path: "/profile",
         element: (
-            <Protected>
+            <Protected roles={["admin"]}>
                 <Navbar />
                 <Container className="mt-5">
                     <Profile />

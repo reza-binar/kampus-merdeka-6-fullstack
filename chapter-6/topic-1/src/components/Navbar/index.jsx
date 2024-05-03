@@ -29,9 +29,12 @@ const NavbarComponent = () => {
                         </Nav.Link>
                         {user ? (
                             <>
-                                <Nav.Link as={Link} to="/profile">
-                                    {user?.name}
-                                </Nav.Link>
+                                {user?.role == "admin" && (
+                                    <Nav.Link as={Link} to="/profile">
+                                        {user?.name}
+                                    </Nav.Link>
+                                )}
+
                                 <Nav.Link
                                     onClick={() => {
                                         dispatch(logout());
