@@ -21,7 +21,7 @@ exports.register = async (payload) => {
 
 exports.login = async (email, password) => {
     // get the user
-    let user = await getUserByEmail(email);
+    let user = await getUserByEmail(email, true);
     if (!user) {
         throw new Error(`User is not found!`);
     }
