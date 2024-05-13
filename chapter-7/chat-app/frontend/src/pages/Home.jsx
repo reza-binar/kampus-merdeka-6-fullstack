@@ -30,7 +30,8 @@ function Home() {
         socket.on("connect", () => {});
 
         // It will listen the event name "message"
-        socket.on("message", () => {
+        socket.on("message", (message) => {
+            console.log("aku dijalankan!", message);
             dispatch(getAllMessages());
         });
 
@@ -39,6 +40,10 @@ function Home() {
             setTimeout(() => {
                 setTyping(false);
             }, 1000);
+        });
+
+        socket.on("getAllMessages", () => {
+            console.log("what happen?");
         });
     }, [dispatch]);
 

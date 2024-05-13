@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/actions/auth";
+import GoogleLogin from "../GoogleLogin";
 
 function Login() {
     const navigate = useNavigate();
@@ -34,7 +35,6 @@ function Login() {
                     We will never share your email with anyone else.
                 </Form.Text>
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
@@ -48,6 +48,8 @@ function Login() {
             <Button variant="primary" type="submit" disabled={isLoading}>
                 {isLoading ? "Processing..." : "Login"}
             </Button>
+            {"   Or   "}
+            <GoogleLogin text={"Login with Google"} />
         </Form>
     );
 }

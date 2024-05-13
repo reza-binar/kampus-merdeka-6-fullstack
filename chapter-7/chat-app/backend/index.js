@@ -1,7 +1,6 @@
 const express = require("express");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
-const { v4: uuidv4 } = require("uuid");
 const cors = require("cors");
 const router = require("./route");
 
@@ -64,6 +63,7 @@ io.on("connection", (socket) => {
     });
 
     socket.on("typing", () => {
+        console.log("aku ditrigger");
         io.emit("ontyping");
     });
 });

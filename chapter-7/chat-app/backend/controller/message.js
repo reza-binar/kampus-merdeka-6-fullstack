@@ -4,6 +4,8 @@ exports.getMessages = async (req, res, next) => {
     try {
         const data = await messageUsecase.getMessages();
 
+        req.io.emit("getAllMessages");
+
         res.status(200).json({
             message: "Successs",
             data,

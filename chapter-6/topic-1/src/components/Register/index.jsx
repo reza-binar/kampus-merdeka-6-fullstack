@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/actions/auth";
+import GoogleLogin from "../GoogleLogin";
 
 function Login() {
     const navigate = useNavigate();
@@ -91,6 +92,8 @@ function Login() {
             <Button variant="primary" type="submit" disabled={isLoading}>
                 {isLoading ? "Processing..." : "Register"}
             </Button>
+            {"   Or   "}
+            <GoogleLogin text={"Register with Google"} />
         </Form>
     );
 }

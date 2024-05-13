@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import { ToastContainer } from "react-toastify";
 import { Provider } from "react-redux";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 import Navbar from "./components/Navbar";
 import Home from "./pages/home";
@@ -78,9 +79,12 @@ const router = createBrowserRouter([
 function App() {
     return (
         <Provider store={store}>
-            <RouterProvider router={router} />
-
-            <ToastContainer theme="colored" />
+            <GoogleOAuthProvider
+                clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}
+            >
+                <RouterProvider router={router} />
+                <ToastContainer theme="colored" />
+            </GoogleOAuthProvider>
         </Provider>
     );
 }
